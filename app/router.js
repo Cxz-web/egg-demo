@@ -9,11 +9,20 @@ module.exports = app => {
 		controller,
 		io
 	} = app;
-	router.get('/', controller.home.index);
+	router.get('/home', controller.home.index);
 	router.get('/news', controller.news.list);
-	router.get('/demo', controller.demo.index);
-
-	router.post('/essay', controller.essay.sumbitEssay)
-	router.get('/essay', controller.essay.getEssay)
+	
+	router.get('/ppt/:name', controller.demo.index);
+	router.post('/upload', controller.demo.upload);
+	router.get('/getPPT', controller.demo.getPPT)
+	
+	
 	io.of('/io').route('serve', io.controller.nsp.exchange);
+	
+	/* User相关 */
+	router.post('/register', controller.user.register)
+	router.post('/login', controller.user.login)
+	router.get('/getSession', controller.user.getSession)
+	
 };
+

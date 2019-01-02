@@ -7,17 +7,7 @@ module.exports = appInfo => {
 
 		config.keys = appInfo.name + '_1543541934316_8226';
 
-	config.mysql = {
-		client: {
-			host: 'localhost',
-			port: 3306,
-			user: 'root',
-			password: '123456',
-			database: 'test'
-		},
-		app: true,
-		agent: false
-	};
+	
 
 	config.middleware = [];
 
@@ -67,9 +57,9 @@ module.exports = appInfo => {
 	};
 
 	config.security = {
-		domainWhiteList: ['http://172.16.1.102:8080'],
-		csrf: {
-			ignoreJSON: true
+              	
+      		csrf: {
+			enable:false
 		}
 	};
 
@@ -81,11 +71,28 @@ module.exports = appInfo => {
 		server: 'wss://agentserver.node.aliyun.com:8080',
 		appid: '77668',
 		secret: '1b896f80150d7cf6217f71bd6d3e1e5325d6fae9',
-		logdir: '/tmp/'
+		logdir: '/home/ubuntu/logs/alinode/'
 	};
+	
+config.multipart = {
+   fileExtensions: ['.pptx', '.ppt']
+}
+	
+
+	config.mysql = {
+		client: {
+			host: 'localhost',
+			port: 3306,
+			user: 'root',
+			password: '123456',
+			database: 'test'
+		},
+		app: true,
+		agent: false
+	};	
 
 
-	return config;
+return config;
 };
 
 

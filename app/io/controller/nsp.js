@@ -14,11 +14,11 @@ class NspController extends Controller {
 		const query = socket.handshake.query;
 		const {
 			room,
-			userId
+			
 		} = query;
 
 		const client = socket.id;
-		
+		console.log(query)
 
 		try {
 			/*  const { target, payload } = message;
@@ -27,8 +27,7 @@ class NspController extends Controller {
 			/* let res = await app.redis.get('Users') */
 			/* console.log(res) */
 			nsp.emit('chat', {
-				message,
-				userId
+				message
 			});
 			
 			 /* const { target, payload } = message;

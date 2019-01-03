@@ -18,7 +18,7 @@ const myFs = (path) => {
 class DemoController extends Controller {
 	async index() {
 		const myPath = path.join(__dirname, `/ppt/${this.ctx.params.name}`);
-		
+
 		var rs = fs.createReadStream(myPath);
 		/* rs.pipe(this.ctx.body) */
 
@@ -26,32 +26,62 @@ class DemoController extends Controller {
 	}
 
 	async getPPT() {
-		
-		const way = path.join(__dirname, '/ppt')
-		
-		const res = await myFs(way)
+
+		const firPath = path.resolve(__dirname, '../public')
+		const secPath = path.join(firPath, '/ppt/')
+		const res = await myFs(secPath)
 		this.ctx.body = res
 	}
 
+	async uploadPPT() {
+		const path = require('path');
+		const ctx = this.ctx;
+		const stream = await ctx.getFileStream();
+		if (!stream) {
+			ctx.body = {
+				msg: '请先选择文件'
+			}
+			return
+		}
+		console.log(stream)
+		const firPath = path.resolve(__dirname, '../public')
+		const secPath = path.join(firPath, '/ppt/')
+		const name = stream.filename
+		const finalPath = secPath + name
+		let write;
+		try {
+			write = fs.createWriteStream(finalPath)
+			stream.pipe(write)
+		} catch (err) {
+			// 必须将上传的文件流消费掉，要不然浏览器响应会卡死
+			throw err;
+		}
+
+		ctx.body = {
+			msg: '上传成功',
+			path: `/public/avatar/${name}`,
+		}
+
+	}
+
 	async upload() {
-		
+
 		const path = require('path');
 		const ctx = this.ctx;
 
 		const stream = await ctx.getFileStream();
-		
-		
+
+
 		if (!stream) {
 			ctx.body = {
 				msg: '请先选择文件'
 			}
 		}
-		const extend = stream.mime.substr(stream.mime.indexOf('/') + 1, stream.mime.length)   
+		const extend = stream.mime.substr(stream.mime.indexOf('/') + 1, stream.mime.length)
 		const firPath = path.resolve(__dirname, '../public')
-		const secPath = path.join(firPath, '/')
+		const secPath = path.join(firPath, '/avatar/')
 		const name = ctx.helper.randomNum(true, 20, 7) + '.' + extend
 		const finalPath = secPath + name
-	
 		let write;
 		try {
 			write = fs.createWriteStream(finalPath)
@@ -65,7 +95,7 @@ class DemoController extends Controller {
 
 		ctx.body = {
 			msg: '上传成功',
-			path: `/public/avatar/${name}`
+			path: `不告诉你`
 
 		};
 
@@ -74,4 +104,3 @@ class DemoController extends Controller {
 }
 
 module.exports = DemoController;
-

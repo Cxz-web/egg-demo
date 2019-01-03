@@ -14,6 +14,9 @@ module.exports = app => {
 	
 	router.get('/ppt/:name', controller.demo.index);
 	router.post('/upload', controller.demo.upload);
+	
+	router.post('/uploadPPT', controller.demo.uploadPPT);
+	
 	router.get('/getPPT', controller.demo.getPPT)
 	
 	

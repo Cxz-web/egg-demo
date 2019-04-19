@@ -28,7 +28,7 @@ class DemoController extends Controller {
 	async getPPT() {
 
 		const firPath = path.resolve(__dirname, '../public')
-		const secPath = path.join(firPath, '/ppt/')
+		const secPath = path.join(firPath, '/ppt_data/')
 		const res = await myFs(secPath)
 		this.ctx.body = res
 	}
@@ -79,9 +79,10 @@ class DemoController extends Controller {
 		}
 		const extend = stream.mime.substr(stream.mime.indexOf('/') + 1, stream.mime.length)
 		const firPath = path.resolve(__dirname, '../public')
-		const secPath = path.join(firPath, '/avatar/')
+		const secPath = path.join(firPath, '/ppt_data/')
 		const name = ctx.helper.randomNum(true, 20, 7) + '.' + extend
 		const finalPath = secPath + name
+		console.log(finalPath)
 		let write;
 		try {
 			write = fs.createWriteStream(finalPath)
@@ -95,7 +96,7 @@ class DemoController extends Controller {
 
 		ctx.body = {
 			msg: '上传成功',
-			path: `不告诉你`
+			path: name
 
 		};
 

@@ -17,7 +17,7 @@ const myFs = (path) => {
 
 class DemoController extends Controller {
 	async index() {
-		const myPath = path.join(__dirname, `/ppt/${this.ctx.params.name}`);
+		const myPath = path.resolve(__dirname, `../public/ppt/${this.ctx.params.name}`);
 
 		var rs = fs.createReadStream(myPath);
 		/* rs.pipe(this.ctx.body) */

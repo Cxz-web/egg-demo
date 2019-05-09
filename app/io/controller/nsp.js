@@ -10,13 +10,14 @@ class NspController extends Controller {
 
 		const nsp = app.io.of('/io');
 		const message = ctx.args[0] || {};
+		
 		const socket = ctx.socket;
 		const query = socket.handshake.query;
 		const {
 			room,
 			
 		} = query;
-
+		console.log(message)
 		const client = socket.id;
 		console.log(query)
 
@@ -27,9 +28,10 @@ class NspController extends Controller {
 			/* let res = await app.redis.get('Users') */
 			/* console.log(res) */
 			nsp.emit('chat', {
-				message
+				message,
+				userId: query
 			});
-			
+				
 			 /* const { target, payload } = message;
       if (!target) return;
       const msg = ctx.helper.parseMsg('exchange', payload, { client, target });

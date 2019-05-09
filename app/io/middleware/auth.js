@@ -82,6 +82,7 @@ module.exports = () => {
 
 		// 用户加入
 		logger.debug('#join', room);
+		console.log(1, room)
 		socket.join(room);
 
 		// 在线列表

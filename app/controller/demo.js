@@ -99,7 +99,6 @@ class DemoController extends Controller {
 			path: name
 
 		};
-
 	}
 
 }

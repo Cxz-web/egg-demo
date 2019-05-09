@@ -27,5 +27,10 @@ module.exports = app => {
 	router.post('/login', controller.user.login)
 	router.get('/getSession', controller.user.getSession)
 	
+	router.get('/getToken', controller.user.getToken)
+
+	router.post('/saveData', controller.essay.saveData)
+	router.post('/getData', controller.essay.getData)
+	
 };
 

@@ -1,11 +1,12 @@
 'use strict';
 
 module.exports = appInfo => {
+	
 	const config = exports = {};
-
+	
 	env: 'debug',
 
-		config.keys = appInfo.name + '_1543541934316_8226';
+	config.keys = appInfo.name + '_1543541934316_8226';
 
 	
 
@@ -62,7 +63,7 @@ module.exports = appInfo => {
 			enable:false
 		}
 	};
-
+	
 	config.cors = {
 		allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
 	};
@@ -79,17 +80,17 @@ config.multipart = {
 }
 	
 
-	config.mysql = {
-		client: {
-			host: 'localhost',
-			port: 3306,
-			user: 'root',
-			password: '123456',
-			database: 'test'
-		},
-		app: true,
-		agent: false
-	};	
+	// config.mysql = {
+	// 	client: {
+	// 		host: 'localhost',
+	// 		port: 3306,
+	// 		user: 'root',
+	// 		password: '123456',
+	// 		database: 'test'
+	// 	},
+	// 	app: true,
+	// 	agent: false
+	// };	
 
 
 return config;

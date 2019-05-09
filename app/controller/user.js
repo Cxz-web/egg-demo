@@ -2,7 +2,41 @@
 const fs = require('fs')
 const Controller = require('egg').Controller;
 
+const appid = 'wx422c9ac4e3e57691'
+const secret = '9e014ab3610c8a685c9031bc7df67ac5'
+
+let token = null
+let toekn_url = `https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=${appid}&secret=${secret}`
+
+let ticket = null
+
+
+
 class UserController extends Controller {
+	
+	async getToken() {
+		let ctx = this.ctx
+		const result = await ctx.curl(toekn_url, {
+			dataType: 'json',
+			timeout: 3000,
+		});
+		const access_token = result.data.access_token
+		let url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi' + `&access_token=${access_token}` 
+		const result2 = await ctx.curl(url, {
+			dataType: 'json',
+			timeout: 3000
+		});
+		
+		
+		ctx.body = {
+			package: result2.data.ticket
+		}
+	}
+	
+ 
+	
+	
+	
 	
 	async register() {
 		/* this.ctx.set('Access-Control-Allow-Credentials', true); */

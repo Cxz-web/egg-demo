@@ -18,13 +18,13 @@ class UserController extends Controller {
 		let ctx = this.ctx
 		const result = await ctx.curl(toekn_url, {
 			dataType: 'json',
-			timeout: 3000,
+			timeout: 10000,
 		});
 		const access_token = result.data.access_token
 		let url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi' + `&access_token=${access_token}` 
 		const result2 = await ctx.curl(url, {
 			dataType: 'json',
-			timeout: 3000
+			timeout: 10000
 		});
 		
 		

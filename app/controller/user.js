@@ -33,6 +33,87 @@ class UserController extends Controller {
 		}
 	}
 	
+	
+	// 查询我当前的票数
+	async myRank() {
+		let ctx = this.ctx
+		let phone = ctx.request.query.phone
+		let list = ctx.app.cache
+		let res = null
+		let index = -1
+		if(Array.isArray(list)) {
+			index = list.findIndex((item) => {
+					return item.phone === phone
+				  })
+		}
+		if(index >=0 ) {
+			ctx.body = {
+				msg: 'suc',
+				list: list[index] || null,
+				rank: index + 1
+			}
+		}else {
+			ctx.body = {
+				msg: 'suc',
+				list:  null
+			}
+		}
+		
+		
+	}
+	
+	// 查询前10名 
+	async allRank() {
+		let ctx = this.ctx
+		// const res = await this.app.mysql.select('swa', {
+		// 	orders: [['num','desc']], 
+		// 	limit: 10
+		// })
+		let list = ctx.app.cache.slice(0, 10)
+		
+		ctx.body ={
+			msg:  'suc',
+			list: list
+		}
+	}
+	
+	// 点赞
+	async addRank() {
+		let ctx = this.ctx
+		let params = ctx.request.body
+		const ip = ctx.ip
+		const phone = params.phone 
+		const ipRes = await this.app.mysql.get('ip', { ip:   ip})
+		if(ipRes) {
+			ctx.body = {
+				msg: 'repeat',
+				type: 1
+			}
+			return 
+		}else {
+			await this.app.mysql.insert('ip', { ip: ip, add: 'false'})
+		}
+		
+		
+		const res = await this.app.mysql.get('swa', { phone:   phone})
+		if(!res) {
+			const result = await this.app.mysql.insert('swa', { phone: phone, num: 1 })
+		}else {
+			let num = res.num
+			let params = {
+				num: ++ res.num,
+				id: res.id
+			}
+			const result = await this.app.mysql.update('swa', params)
+		}
+		
+		ctx.body = {
+			msg: 'successful',
+			type: 0
+		}
+		
+	}
+	
  
 	
 	

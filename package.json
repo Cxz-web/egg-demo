@@ -14,7 +14,8 @@
     "egg-socket.io": "^4.1.5",
     "egg-view-nunjucks": "^2.2.0",
     "github-webhook-handler": "^0.7.1",
-    "mysql2": "^1.6.4"
+    "mysql2": "^1.6.4",
+    "vue-router": "^3.0.6"
   },
   "devDependencies": {
     "autod": "^3.0.1",

@@ -33,5 +33,11 @@ module.exports = app => {
 	router.post('/saveData', controller.essay.saveData)
 	router.post('/getData', controller.essay.getData)
 	
+	
+	// SWA
+	router.post('/addRank', controller.user.addRank)
+	router.get('/myRank', controller.user.myRank)
+	router.get('/allRank', controller.user.allRank)
+	
 };
 

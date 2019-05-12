@@ -8,7 +8,7 @@ module.exports = appInfo => {
 
 	config.keys = appInfo.name + '_1543541934316_8226';
 
-	
+	config.proxy = true;
 
 	config.middleware = [];
 
@@ -19,6 +19,8 @@ module.exports = appInfo => {
 			'.tpl': 'nunjucks',
 		},
 	};
+	
+	config.maxProxyCount = 1;
 
 	config.news = {
 		pageSize: 5,
@@ -58,7 +60,7 @@ module.exports = appInfo => {
 	};
 
 	config.security = {
-              	domainWhiteList: ['*'],
+            domainWhiteList: ['*'],
       		csrf: {
 			enable:false
 		}

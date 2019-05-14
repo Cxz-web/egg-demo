@@ -38,6 +38,8 @@ module.exports = app => {
 	router.post('/addRank', controller.user.addRank)
 	router.get('/myRank', controller.user.myRank)
 	router.get('/allRank', controller.user.allRank)
+	router.get('/queryOne', controller.user.queryOne)
+	router.get('/queryAll', controller.user.queryAll)
 	
 };
 

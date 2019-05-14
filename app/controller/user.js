@@ -33,6 +33,38 @@ class UserController extends Controller {
 		}
 	}
 	
+	// 后台查询全部数据
+	async queryAll() {
+		let ctx = this.ctx
+		const res = await this.app.mysql.select('swa', {
+			orders: [['num','desc']]
+		})
+		if(!res) {
+			ctx.body = {
+				list: null
+			}
+			return 
+		}
+		ctx.body = {
+			list: res
+		}
+	}
+	
+	// 后台查询一个人数据
+	async queryOne() {
+		let ctx = this.ctx
+		let phone = ctx.request.query.phone || '12345678910'
+		const post = await this.app.mysql.get('swa', { phone: phone })
+		if(!post) {
+			ctx.body = {
+				list: null
+			}
+			return
+		}
+		ctx.body = {
+			list: post
+		}
+	}
 	
 	// 查询我当前的票数
 	async myRank() {

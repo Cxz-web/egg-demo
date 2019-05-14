@@ -11,7 +11,6 @@ class UpdateCache extends Subscription {
 
   // subscribe 是真正定时任务执行时被运行的函数
   async subscribe() {
-	console.log('执行')
     const res = await this.app.mysql.select('swa', {
     	orders: [['num','desc']]
     })

@@ -116,14 +116,20 @@ class UserController extends Controller {
 		const ip = ctx.ip
 		const phone = params.phone 
 		const ipRes = await this.app.mysql.get('ip', { ip:   ip})
+
 		if(ipRes) {
-			ctx.body = {
-				msg: 'repeat',
-				type: 1
+			if(ipRes.add_num >= 3) {
+				ctx.body = {
+					msg: 'repeat',
+					type: 1
+				}
+				return 
+			} else {
+				await this.app.mysql.update('ip', {id: ipRes.id, add_Num: ++ ipRes.add_num })
 			}
-			return 
+			
 		}else {
-			await this.app.mysql.insert('ip', { ip: ip, add: 'false'})
+			await this.app.mysql.insert('ip', { ip: ip, add: 'false', add_num: 1})
 		}
 		
 		
